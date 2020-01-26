@@ -1,0 +1,21 @@
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+def build(bld):
+    module = bld.create_ns3_module('quantumrouting', ['network'])
+    module.source = [
+        'helper/quantumrouting-helper.cc',
+        'model/quantumrouting-table.cc',
+        'model/quantumrouting.cc',
+        ]
+    headers = bld(features='ns3header')
+    headers.module = 'quantumrouting'
+    headers.source = [
+        'helper/quantumrouting-helper.h',
+        'model/quantumrouting-table.h',
+        'model/quantumrouting.h',
+        ]
+
+    if (bld.env['ENABLE_EXAMPLES']):
+        bld.recurse('examples')
+
+    bld.ns3_python_bindings()

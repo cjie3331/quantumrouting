@@ -1,0 +1,22 @@
+## -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+from waflib import Options
+
+required_python_modules = [
+    'gi',
+    'gi.repository.GObject',
+    'cairo',
+    'pygraphviz',
+    'gi.repository.Gtk',
+    'gi.repository.Gdk',
+    'gi.repository.Pango',
+]
+
+
+
+def build(bld):
+  obj = bld.create_ns3_program('quantumrouting-example', ['core', 'mobility', 'applications', 'wifi','quantumrouting','netanim'])
+  obj.source = 'quantumrouting-example.cc'
+  obj.features += ' pyembed'
+  obj = bld.create_ns3_program('quantumrouting-fqst',['core','mobility','applications','wifi','quantumrouting'])
+  obj.source = 'quantumrouting-fqst.cc'
+  obj.features += ' pyembed'
